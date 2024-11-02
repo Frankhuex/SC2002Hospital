@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "SC2002Project",
+			"path": "."
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive"
+	}
+}
