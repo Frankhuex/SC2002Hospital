@@ -3,17 +3,21 @@ package org.sc2002.hospital.menu;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import org.sc2002.hospital.container.data.InventoryContainer;
 import org.sc2002.hospital.container.user.StaffContainer;
 import org.sc2002.hospital.record.Record;
+import org.sc2002.hospital.record.data.Inventory;
 import org.sc2002.hospital.record.user.Staff;
 
 public class AdministratorMenu extends Menu {
     private StaffContainer staffContainer;
+    private InventoryContainer inventoryContainer;
     private Scanner sc=new Scanner(System.in);
 
-    public AdministratorMenu(StaffContainer staffContainer) {
+    public AdministratorMenu(StaffContainer staffContainer, InventoryContainer inventoryContainer) {
         super();
         this.staffContainer = staffContainer;
+        this.inventoryContainer = inventoryContainer;
     }
 
     public void displayStaffList(){
@@ -140,20 +144,15 @@ public class AdministratorMenu extends Menu {
     }
         
     void manageStaff(){
-        Scanner sc=new Scanner(System.in);
-        int choice, age;
-        String hospitalId, name, gender, userType;
+        int choice;
 
         do {
-            System.out.println("Manage Hospital Staff");
+            System.out.println("\nManage Hospital Staff");
             System.out.println("0. Back");
             System.out.println("1. View Staff");
             System.out.println("2. Add Staff");
             System.out.println("3. Remove Staff");
             System.out.println("4. Update Staff\n");
-
-           
-
             System.out.print("Enter your choice: ");
             choice=sc.nextInt();
             switch (choice) {
@@ -183,11 +182,144 @@ public class AdministratorMenu extends Menu {
 
     public void manageAppointments(){
         System.out.println("Appointments details");
-        
+        System.out.println("NOT COMPLETED YET");
+    }
 
+    public void viewMedicationInventory(){
+        Record record;
+        String medicineName;
+        int initialStock, alertLevel;
+        HashMap<Integer, Record> inventoryRecords = inventoryContainer.getRecords();
+        System.out.println("Medication Inventory: \nMedicine Name, Initial Stock, Alert Level");
+        for (int i:inventoryRecords.keySet()) {
+            record = inventoryRecords.get(i);
+            medicineName = ((Inventory)record).getMedicineName();
+            initialStock = ((Inventory)record).getCurrentStock();
+            alertLevel = ((Inventory)record).getAlertThreshold();
+
+            System.out.println(medicineName+", "+initialStock+", "+alertLevel);
+        }
+        System.out.println();
+    }
+
+    public void addMedication(){
+
+        System.out.print("You are adding medication\nEnter medicine name: ");
+        String medicineName = sc.next();
+
+        if (inventoryContainer.containsMedicine(medicineName)) {
+            System.out.println("Medicine already exists. Going back to the parent menu: ");
+            return;
+        }
+        
+        System.out.print("Enter initial stock: ");      //can add check for invalid (negative) stock
+        int initialStock=sc.nextInt();
+        System.out.print("Enter alert level: ");
+        int alertLevel=sc.nextInt();
+
+        Inventory inventory=new Inventory(
+            medicineName,
+            initialStock,
+            alertLevel
+        );
+        inventoryContainer.putRecord(inventory);
+        System.out.println("Medication added successfully\n");
+    }
+
+    public void removeMedication(){
+        System.out.print("You are removing medication!\nEnter medicine name of medication to remove: ");
+        String medicineName=sc.next();
+        if (inventoryContainer.containsMedicine(medicineName)) {
+            int recordID = inventoryContainer.getRecordIdByMedicineName(medicineName);
+            inventoryContainer.removeRecord(recordID);
+            System.out.println("Medication removed successfully");
+        } else {
+            System.out.println("Medication does not exist");
+        }
+    }
+
+    public void updateMedicationStockLevel(){
+        System.out.print("You are updating medication stock level!\nEnter medicine name of medication to update: ");
+        String medicineName=sc.next();
+        if (inventoryContainer.containsMedicine(medicineName)) {
+            int recordID = inventoryContainer.getRecordIdByMedicineName(medicineName);
+            System.out.print("Enter new stock level: ");
+            int newStockLevel = sc.nextInt();
+            ((Inventory)inventoryContainer.getRecord(recordID)).setCurrentStock(newStockLevel);
+            System.out.println("Stock level updated successfully");
+        } else {
+            System.out.println("Medication does not exist");
+        }
+    }
+
+    public void updateLowStockLevelAlertLine(){
+        System.out.print("You are updating low stock level alert line!\nEnter medicine name of medication to update: ");
+        String medicineName=sc.next();
+        if (inventoryContainer.containsMedicine(medicineName)) {
+            int recordID = inventoryContainer.getRecordIdByMedicineName(medicineName);
+            System.out.print("Enter new low stock level alert line: ");
+            int newAlertLevel = sc.nextInt();
+            ((Inventory)inventoryContainer.getRecord(recordID)).setAlertThreshold(newAlertLevel);
+            System.out.println("Low stock level alert line updated successfully");
+        } else {
+            System.out.println("Medication does not exist");
+        }
+    }
+
+    public void approvePharmacistsReplenishmentRequests(){
+        System.out.println("Approve Pharmacists' Replenishment Requests");
+        System.out.println("NOT COMPLETED YET");
     }
 
 
+    public void manageMedicationInventory(){
+        int choice;
+
+        do { 
+            System.out.println("\nManage Medication Inventory");
+            System.out.println("0. Back");
+            System.out.println("1. View Medication Inventory");
+            System.out.println("2. Add Medication");
+            System.out.println("3. Remove Medication");
+            System.out.println("4. Update Medication Stock Level");
+            System.out.println("5. Update Low Stock Level Alert Line");
+            System.out.println("6. Approve Pharmacists' Replenishment Requests ");
+            System.out.print("Enter your choice: ");
+
+            choice=sc.nextInt();
+            switch (choice) {
+                case 0:
+                    System.out.println("Going back..."); break;
+
+                case 1: 
+                    viewMedicationInventory();
+                    break;
+
+                case 2:
+                    addMedication();
+                    break;
+                
+                case 3:
+                    removeMedication();
+                    break;
+
+                case 4:
+                    updateMedicationStockLevel();
+                    break;
+
+                case 5:
+                    updateLowStockLevelAlertLine();
+                    break;
+                
+                case 6:
+                    approvePharmacistsReplenishmentRequests();
+                    break;
+
+                default:
+                    System.out.println("Invalid choice");
+            }
+        } while (choice!=0);  
+    }
 
 
 
@@ -219,8 +351,7 @@ public class AdministratorMenu extends Menu {
                     manageAppointments();
                     break;
                 case 3:
-                    // displayMedicationInventory();
-                    // manageMedicationInventory();
+                    manageMedicationInventory();
                     break;
                 case 4:
                     // displayReplenishmentRequests();
