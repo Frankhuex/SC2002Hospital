@@ -38,4 +38,28 @@ public class InventoryContainer extends RecordContainer {
             e.printStackTrace();
         }
     }
+
+    public boolean containsMedicine(String medicineName) {
+        for (int recordId : getRecords().keySet()) {
+            Inventory inventory = (Inventory) getRecord(recordId);
+            if (inventory.getMedicineName().equals(medicineName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getMedicineNameByRecordId(int recordId) {
+        return ((Inventory)(getRecord(recordId))).getMedicineName();
+    }
+
+    public int getRecordIdByMedicineName(String medicineName) {
+        for (int recordId : getRecords().keySet()) {
+            Inventory inventory = (Inventory) getRecord(recordId);
+            if (inventory.getMedicineName().equals(medicineName)) {
+                return recordId;
+            }
+        }
+        return 0;
+    }
 }
