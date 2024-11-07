@@ -266,10 +266,91 @@ public class AdministratorMenu extends Menu {
         }
     }
 
-    public void approvePharmacistsReplenishmentRequests(){
-        System.out.println("Approve Pharmacists' Replenishment Requests");
-        System.out.println("NOT COMPLETED YET");
+    public void viewPharmacistsReplenishmentRequests(){
+        Record record;
+        String medicineName;
+        int initialStock, alertLevel,requestedStock;
+        HashMap<Integer, Record> inventoryRecords = inventoryContainer.getRecords();
+        boolean flag = false;
+        for (int i:inventoryRecords.keySet()) {
+            record = inventoryRecords.get(i);
+            if(((Inventory)record).getPharmacistRefillRequest() > 0){
+                if(!flag){
+                    System.out.println("\nMedication Inventory: \nMedicine Name, Initial Stock, Alert Level, Requested Stock");
+                    flag = true;
+                }
+                medicineName = ((Inventory)record).getMedicineName();
+                initialStock = ((Inventory)record).getCurrentStock();
+                alertLevel = ((Inventory)record).getAlertThreshold();
+                requestedStock = ((Inventory)record).getPharmacistRefillRequest();
+
+                System.out.println(medicineName+", "+initialStock+", "+alertLevel+", "+requestedStock);
+            }
+        }
+        if(!flag){
+            System.out.println("\nNo requests found");
+        }
     }
+
+    public void approvePharmacistsReplenishmentRequests(){
+        System.out.print("\nYou are approving pharmacists' replenishment requests!\nEnter medicine name of medication to approve: ");
+        String medicineName=sc.next();
+        if (inventoryContainer.containsMedicine(medicineName)) {
+            int recordID = inventoryContainer.getRecordIdByMedicineName(medicineName);
+            int medRequest = ((Inventory)inventoryContainer.getRecord(recordID)).getPharmacistRefillRequest() + ((Inventory)inventoryContainer.getRecord(recordID)).getCurrentStock();
+            ((Inventory)inventoryContainer.getRecord(recordID)).setCurrentStock(medRequest);
+            ((Inventory)inventoryContainer.getRecord(recordID)).setRequest(0);
+            System.out.println("Request approved successfully");
+        } else {
+            System.out.println("Medication does not exist");
+        }
+    }
+
+    public void simulateRequest(){
+        System.out.print("\nYou are simulating a request!\nEnter medicine name of medication to request: ");
+        String medicineName=sc.next();
+        if (inventoryContainer.containsMedicine(medicineName)) {
+            System.out.print("Enter quantity to request: ");
+            int quantity = sc.nextInt();
+            inventoryContainer.requestReplenishment(medicineName, quantity);
+            System.out.println("Request sent successfully");
+        } else {
+            System.out.println("Medication does not exist");
+        }
+    }
+
+    public void managePharmacistsReplenishmentRequests(){
+        int choice;
+        do { 
+            System.out.println("\nPharmacists' Replenishment Requests");
+            System.out.println("0. Back");
+            System.out.println("1. View Requests");
+            System.out.println("2. Approve Request");
+            System.out.print("Enter your choice: ");
+            choice=sc.nextInt();
+            switch (choice) {
+                case 0:
+                    System.out.println("Going back..."); break;
+                case 1:
+                    viewPharmacistsReplenishmentRequests();
+                    break;
+                case 2:
+                    approvePharmacistsReplenishmentRequests();
+                    break;
+                case 3:
+                    simulateRequest();  //hidden option for admin to simulate a request
+                default:
+                    System.out.println("Invalid choice");
+            }
+
+
+
+        } while (choice!=0);
+    }
+
+
+
+
 
 
     public void manageMedicationInventory(){
@@ -312,7 +393,7 @@ public class AdministratorMenu extends Menu {
                     break;
                 
                 case 6:
-                    approvePharmacistsReplenishmentRequests();
+                    managePharmacistsReplenishmentRequests();
                     break;
 
                 default:
@@ -333,12 +414,12 @@ public class AdministratorMenu extends Menu {
         Scanner sc=new Scanner(System.in);
         int choice;
         do {
-            System.out.println("Administrator Menu");
+            System.out.println("\nAdministrator Menu");
             System.out.println("0. Log out");
             System.out.println("1. View and manage hospital staff");
             System.out.println("2. View appointments details");
             System.out.println("3. View and Manage Medication Inventory ");
-            System.out.println("4. Approve Replenishment Requests ");
+            //System.out.println("4. Approve Replenishment Requests ");
             System.out.print("Enter your choice: ");
             choice=sc.nextInt();
             switch (choice) {
@@ -353,10 +434,9 @@ public class AdministratorMenu extends Menu {
                 case 3:
                     manageMedicationInventory();
                     break;
-                case 4:
-                    // displayReplenishmentRequests();
-                    // approveReplenishmentRequests();
-                    break;      
+                // case 4:
+                //     managePharmacistsReplenishmentRequests();
+                //     break;      
                 default:
                     System.out.println("Invalid choice");
             }
