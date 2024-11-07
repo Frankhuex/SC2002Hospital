@@ -38,4 +38,49 @@ public class InventoryContainer extends RecordContainer {
             e.printStackTrace();
         }
     }
+
+    public boolean containsMedicine(String medicineName) {
+        for (int recordId : getRecords().keySet()) {
+            Inventory inventory = (Inventory) getRecord(recordId);
+            if (inventory.getMedicineName().equals(medicineName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getMedicineNameByRecordId(int recordId) {
+        return ((Inventory)(getRecord(recordId))).getMedicineName();
+    }
+
+    public int getRecordIdByMedicineName(String medicineName) {
+        for (int recordId : getRecords().keySet()) {
+            Inventory inventory = (Inventory) getRecord(recordId);
+            if (inventory.getMedicineName().equals(medicineName)) {
+                return recordId;
+            }
+        }
+        return 0;
+    }
+
+    // written by pharmacist
+    // Method to view inventory details //FR
+    // public void viewInventory() {
+    //     for (String medication : inventory.keySet()) {
+    //         int stock = inventory.get(medication);
+    //         System.out.println("Medication: " + medication + "; Stock Level: " + stock);
+    //     }
+    // }
+
+    // Method to request replenishment of a medication
+    // Admin version, remember to edit PharmacistMenu
+    public void requestReplenishment(String medication, int quantity) {
+        if(containsMedicine(medication)) {
+            int recordId = getRecordIdByMedicineName(medication);
+            Inventory inventory = (Inventory) getRecord(recordId);
+            inventory.setRequest(quantity);
+        }
+    }
+
+
 }
