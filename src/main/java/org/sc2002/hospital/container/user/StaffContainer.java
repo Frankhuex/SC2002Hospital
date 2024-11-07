@@ -43,4 +43,8 @@ public class StaffContainer extends UserContainer {
             e.printStackTrace();
         }
     }
+
+    public String getHospitalIdByRecordId(int recordId) {
+        return ((Staff)(getRecord(recordId))).getHospitalId();
+    }
 }
