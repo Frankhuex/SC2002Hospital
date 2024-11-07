@@ -4,6 +4,7 @@ public class Inventory extends Record {
     private String medicineName;
     private int currentStock;
     private int alertThreshold;
+    private int PharmacistRefillRequest = 0;
     public Inventory(String medicineName, int currentStock, int alertThreshold) {
         this.medicineName = medicineName;
         this.currentStock = currentStock;
@@ -35,5 +36,13 @@ public class Inventory extends Record {
     }
     public void setAlertThreshold(int alertThreshold) {
         this.alertThreshold = alertThreshold;
+    }
+
+    public void setRequest(int PharmacistRefillRequest) {
+        this.PharmacistRefillRequest = PharmacistRefillRequest;
+    }
+
+    public int getPharmacistRefillRequest() {
+        return this.PharmacistRefillRequest;
     }
 }
