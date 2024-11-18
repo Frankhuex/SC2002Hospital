@@ -55,7 +55,7 @@ public class AppointmentOutcomeContainer extends RecordContainer {
                     consultaionNote
                 );
                 appointmentOutcome.initRecordId(recordId);
-                System.out.println(appointmentOutcome);
+                //System.out.println(appointmentOutcome);
                 putRecord(appointmentOutcome);
             }
         } catch (IOException e) {
