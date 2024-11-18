@@ -1,5 +1,8 @@
 package org.sc2002.hospital.record.user;
 
+import java.util.Scanner;
+import org.sc2002.hospital.utility.Utility;
+
 import org.sc2002.hospital.record.Record;
 
 public abstract class User extends Record {
@@ -18,7 +21,6 @@ public abstract class User extends Record {
         String userType, 
         String email) 
     {
-        super();
         this.hospitalId = hospitalId;
         this.password = password;
         this.name = name;
@@ -49,6 +51,7 @@ public abstract class User extends Record {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
     //Name
     public String getName() {
@@ -85,5 +88,8 @@ public abstract class User extends Record {
     public void setEmail(String email) {
         this.email = email; 
     }
+
+    
+    
 
 }

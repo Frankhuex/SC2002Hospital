@@ -1,0 +1,8 @@
+"recordId","hospitalId","password","name","gender","userType","email","age"
+0,"D001","password","John Smith","Male","Doctor","",45
+1,"D002","password","Emily Clarke","Female","Doctor","",38
+2,"P001","password","PPP","Male","Pharmacist","",29
+3,"A001","password","Sarah Lee","Female","Administrator","",40
+32,"D003","password","Man","Male","Doctor","",1
+40,"D004","password","Man Say","Alien","Doctor","",100
+170,"","password","","","","",1

@@ -4,16 +4,10 @@ public class Inventory extends Record {
     private String medicineName;
     private int currentStock;
     private int alertThreshold;
-    private int PharmacistRefillRequest = 0;
     public Inventory(String medicineName, int currentStock, int alertThreshold) {
         this.medicineName = medicineName;
         this.currentStock = currentStock;
         this.alertThreshold = alertThreshold;
-    }
-
-    @Override
-    public String toString() {
-        return medicineName;
     }
 
     //Medicine Name
@@ -38,11 +32,8 @@ public class Inventory extends Record {
         this.alertThreshold = alertThreshold;
     }
 
-    public void setRequest(int PharmacistRefillRequest) {
-        this.PharmacistRefillRequest = PharmacistRefillRequest;
-    }
-
-    public int getPharmacistRefillRequest() {
-        return this.PharmacistRefillRequest;
+    @Override
+    public String toString() {
+        return medicineName+"\n  Stock: "+currentStock+"\n  Alert threshold: "+alertThreshold;
     }
 }

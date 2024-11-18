@@ -1,5 +1,6 @@
 package org.sc2002.hospital.record.data;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.sc2002.hospital.record.Record;
 
@@ -11,16 +12,25 @@ public class Medical extends Record {
     private ArrayList<String> diagnoses;
 
     public Medical(int patientRecordId) {
-        super();
         this.patientRecordId = patientRecordId;
         this.treatmentPlans = new ArrayList<>();
         this.prescriptions = new ArrayList<>();
         this.diagnoses = new ArrayList<>();
     }
 
+    public Medical(int patientRecordId, String[] treatmentPlans, String[] prescriptions, String[] diagnoses) {
+        this.patientRecordId = patientRecordId;
+        this.treatmentPlans = new ArrayList<>(treatmentPlans.length);
+        this.treatmentPlans.addAll(Arrays.asList(treatmentPlans));
+        this.prescriptions = new ArrayList<>(prescriptions.length);
+        this.prescriptions.addAll(Arrays.asList(prescriptions));
+        this.diagnoses = new ArrayList<>(diagnoses.length);
+        this.diagnoses.addAll(Arrays.asList(diagnoses));
+    }
+
     @Override
     public String toString() {
-        return "Patient"+patientRecordId;
+        return patientRecordId + " " + treatmentPlans + " " + prescriptions + " " + diagnoses;
     }
 
     //Patient Record ID
@@ -49,6 +59,10 @@ public class Medical extends Record {
         treatmentPlans.add(treatmentPlan);
     }
 
+    public void addTreatmentPlans(ArrayList<String> treatmentPlans) {
+        this.treatmentPlans.addAll(treatmentPlans);
+    }
+
     public void removeTreatmentPlan(int index) {
         if (index >= 0 && index < treatmentPlans.size()) {
             treatmentPlans.remove(index);
@@ -64,8 +78,12 @@ public class Medical extends Record {
         this.prescriptions = prescriptions;
     }
 
-    public void addPrescriptions(String prescription) {
+    public void addPrescription(String prescription) {
         prescriptions.add(prescription);
+    }
+
+    public void addPrescriptions(ArrayList<String> prescriptions) {
+        this.prescriptions.addAll(prescriptions);
     }
 
     public void removePrescription(int index) {
@@ -83,8 +101,12 @@ public class Medical extends Record {
         this.diagnoses = diagnoses;
     }
 
-    public void addDiagnoses(String diagnose) {
+    public void addDiagnose(String diagnose) {
         diagnoses.add(diagnose);
+    }
+
+    public void addDiagnoses(ArrayList<String> diagnoses) {
+        this.diagnoses.addAll(diagnoses);
     }
 
     public void removeDiagnose(int index) {

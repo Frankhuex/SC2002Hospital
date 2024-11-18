@@ -1,5 +1,6 @@
 package org.sc2002.hospital.menu;
-
-public abstract class Menu {
-    public abstract void run();
+import java.util.ArrayList;
+import java.util.Scanner;
+public interface Menu {
+    void run();
 }

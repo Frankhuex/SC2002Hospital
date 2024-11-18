@@ -1,0 +1,7 @@
+"recordId","medication","dosage","status"
+16,"Paracetamol",10,"DISPENSED"
+17,"Ibuprofen",20,"DISPENSED"
+51,"Paracetamol",1,"PENDING"
+76,"Paracetamol",20,"DISPENSED"
+77,"CO2",10,"PENDING"
+174,"Ibuprofen",10,"DISPENSED"

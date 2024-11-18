@@ -1,15 +1,25 @@
 package org.sc2002.hospital.record.data;
-
-public class Prescription {
+import org.sc2002.hospital.record.Record;
+public class Prescription extends Record {
     private String medication;
-    private String status="pending";
-    public Prescription(String medication) {
+    private int dosage;
+    public enum Status {PENDING,DISPENSED};
+    private Status status=Status.PENDING;
+    public Prescription(String medication,int dosage) {
         this.medication = medication;
+        this.dosage = dosage;
+        status=Status.PENDING;
+    }
+
+    public Prescription(String medication,int dosage,Status status) {
+        this.medication = medication;
+        this.dosage = dosage;
+        this.status=status;
     }
 
     @Override
     public String toString() {
-        return medication;
+        return "Medication: "+medication+", dosage: "+dosage+", status: "+status;
     }
 
     public String getMedication() {
@@ -18,10 +28,19 @@ public class Prescription {
     public void setMedication(String medication) {
         this.medication = medication;
     }
-    public String getStatus() {
+
+    public Status getStatus() {
         return status;
     }
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public int getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(int dosage) {
+        this.dosage = dosage;
     }
 }

@@ -1,0 +1,4 @@
+"recordId","medicineName","currentStock","alertThreshold","pharmacistRefillRequest"
+7,"Paracetamol",2100,20
+8,"Ibuprofen",1000,10
+9,"Amoxicillin",2085,20

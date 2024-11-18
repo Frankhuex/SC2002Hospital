@@ -1,37 +1,50 @@
 package org.sc2002.hospital.record.data;
+
 import java.util.ArrayList;
 
 import org.sc2002.hospital.container.RecordContainer;
 import org.sc2002.hospital.record.Record;
+
 public class AppointmentOutcome extends Record {
-    
+
     private int appointmentRecordId;
     private String serviceType;
-    private final ArrayList<Prescription> prescriptions;
-    private final ArrayList<String> consultationNotes;
-    
-    public AppointmentOutcome(int appointmentRecordId,String serviceType) {
+    private final ArrayList<Integer> prescriptionRecordIds;
+    private String consultationNote;
+
+    public AppointmentOutcome(int appointmentRecordId, String serviceType) {
         this.appointmentRecordId = appointmentRecordId;
         this.serviceType = serviceType;
-        prescriptions = new ArrayList<>();
-        consultationNotes = new ArrayList<>();
+        prescriptionRecordIds = new ArrayList<>();
+        consultationNote = "";
+    }
+
+    public AppointmentOutcome(int appointmentRecordId, String serviceType, ArrayList<Integer> prescriptionRecordIds, String consultationNote) {
+        this.appointmentRecordId = appointmentRecordId;
+        this.serviceType = serviceType;
+        this.prescriptionRecordIds = prescriptionRecordIds;
+        this.consultationNote = consultationNote;
+    }
+
+    public int getAppointmentRecordId() {
+        return appointmentRecordId;
     }
 
     @Override
     public String toString() {
-        return serviceType;
+        return appointmentRecordId + " " + serviceType + " " + prescriptionRecordIds + " " + consultationNote;
     }
 
-    //Date
+    // Date
     public String getDate(RecordContainer appointmentContainer) {
-        return ((Appointment)(appointmentContainer.getRecord(appointmentRecordId))).getDate();
+        return ((Appointment) (appointmentContainer.getRecord(appointmentRecordId))).getDate();
     }
 
     public void setDate(String date, RecordContainer appointmentContainer) {
-        ((Appointment)(appointmentContainer.getRecord(appointmentRecordId))).setDate(date);
+        ((Appointment) (appointmentContainer.getRecord(appointmentRecordId))).setDate(date);
     }
 
-    //Service Type
+    // Service Type
     public String getServiceType() {
         return serviceType;
     }
@@ -40,37 +53,53 @@ public class AppointmentOutcome extends Record {
         this.serviceType = serviceType;
     }
 
-    //Prescriptions
-    public ArrayList<Prescription> getPrescriptions() {
-        return prescriptions;
-    }
-    public void addPrescription(Prescription prescription) {
-        prescriptions.add(prescription);
-    }
-    public String getMedication(int prescriptionIndex) {
-        return prescriptions.get(prescriptionIndex).getMedication();
-    }
-    public void setMedication(int prescriptionIndex,String medication) {
-        prescriptions.get(prescriptionIndex).setMedication(medication);
-    }
-    public String getStatus(int prescriptionIndex) {
-        return prescriptions.get(prescriptionIndex).getStatus();
-    }
-    public void setStatus(int prescriptionIndex,String status) {
-        prescriptions.get(prescriptionIndex).setStatus(status);
+    // Prescriptions
+    public ArrayList<Integer> getPrescriptionRecordIds() {
+        return prescriptionRecordIds;
     }
 
-    //Consultation Notes
-    public ArrayList<String> getConsultationNotes() {
-        return consultationNotes;
+    public int getPrescriptionRecordId(int prescriptionIndex) {
+        return prescriptionRecordIds.get(prescriptionIndex);
     }
-    public void addConsultationNote(String consultationNote) {
-        consultationNotes.add(consultationNote);
+
+    public void addPrescriptionRecordId(int prescriptionRecordId) {
+        prescriptionRecordIds.add(prescriptionRecordId);
     }
-    public String getConsultationNote(int consultationNoteIndex) {
-        return consultationNotes.get(consultationNoteIndex);
+
+    // public String getMedication(int prescriptionIndex) {
+    //     return prescriptionRecordIds.get(prescriptionIndex).getMedication();
+    // }
+
+    // public void setMedication(int prescriptionIndex, String medication) {
+    //     prescriptions.get(prescriptionIndex).setMedication(medication);
+    // }
+
+    // public Prescription.Status getStatus(int prescriptionIndex) {
+    //     return prescriptions.get(prescriptionIndex).getStatus();
+    // }
+
+    // public void setStatus(int prescriptionIndex, Prescription.Status status) {
+    //     prescriptions.get(prescriptionIndex).setStatus(status);
+    // }
+
+    // Method to update prescription status by medication name //FR
+    // public void updatePrescriptionStatus(String medication, Prescription.Status newStatus) {
+    //     for (Prescription prescription : getPrescriptions()) {
+    //         if (prescription.getMedication().equals(medication)) {
+    //             prescription.setStatus(newStatus);
+    //             break;
+    //         }
+    //     }
+    // }
+
+    // Consultation Notes
+    public String getConsultationNote() {
+        return consultationNote;
     }
-    public void setConsultationNote(int consultationNoteIndex,String consultationNote) {
-        consultationNotes.set(consultationNoteIndex,consultationNote);
+
+    public void setConsultationNote(String consultationNote) {
+        this.consultationNote = consultationNote; 
     }
+
+
 }

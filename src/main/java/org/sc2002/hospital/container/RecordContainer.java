@@ -1,22 +1,39 @@
 package org.sc2002.hospital.container;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import org.sc2002.hospital.record.Record;
-public class RecordContainer {
+public abstract class RecordContainer {
     private final HashMap<Integer,Record> records;
-    
+    private final Queue<Integer> recordIdQueue;
+
     public RecordContainer() {
         records = new HashMap<>();
+        recordIdQueue = new LinkedList<>();
     }
 
+    public abstract void readCSV(String csvPath);
+    public abstract void writeCSV(String csvPath);
 
     public HashMap<Integer,Record> getRecords() {
         return records;
     }
 
+    public int dequeueRecordId() {
+        if (recordIdQueue.isEmpty())
+            return -1;
+        return recordIdQueue.remove();
+    }
+
+    public boolean recordIdQueueIsEmpty() {
+        return recordIdQueue.isEmpty();
+    }
+
     public void putRecord(Record record) {
         records.put(record.getRecordId(), record);
+        recordIdQueue.add(record.getRecordId());
     }
 
     public void removeRecord(int recordId) {

@@ -25,6 +25,13 @@ public class Patient extends User {
         this.bloodType = bloodType;
     }
 
+    public Patient(String hospitalId) {
+        super(hospitalId,"password",hospitalId,"","Patient","");
+        this.dateOfBirth = "";
+        this.phoneNumber = "";
+        this.bloodType = "";
+    }
+
     public String getDateOfBirth() {
         return dateOfBirth;
     }

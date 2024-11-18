@@ -4,12 +4,21 @@ public class Appointment extends Record {
     private String date;
     private int patientRecordId;
     private int doctorRecordId;
-    private String status="pending";
+
+    public enum Status {PENDING,CONFIRMED,CANCELED,COMPLETED,UNAVAILABLE};
+    private Status status=Status.PENDING;
 
     public Appointment(String date, int patientRecordId, int doctorRecordId) {
         this.date = date;
         this.patientRecordId = patientRecordId;
         this.doctorRecordId = doctorRecordId;
+        status=Status.PENDING;
+    }
+    public Appointment(String date, int patientRecordId, int doctorRecordId, Status status) {
+        this.date = date;
+        this.patientRecordId = patientRecordId;
+        this.doctorRecordId = doctorRecordId;
+        this.status = status;
     }
 
     @Override
@@ -46,11 +55,11 @@ public class Appointment extends Record {
     }
 
     //Status
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {   // Setter method for status
+    public void setStatus(Status status) {   // Setter method for status
         this.status = status;
     }
 
