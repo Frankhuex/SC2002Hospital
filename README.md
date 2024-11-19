@@ -3,7 +3,9 @@
 This is a hospital management system developed for SC2002, a software engineering course at Nanyang Technological University. The system is designed to manage the hospital's patients, doctors, and appointments. It allows the hospital to manage their resources and schedule appointments with patients. The system is designed to be user-friendly and easy to use, with a command line based user interface.
 
 ## 2. Key Features
+You can refer to the appendix "SC2002 Test Cases.pdf" in the submission on NTULearn for a complete list of features and functionality of the system. Here are some of the key features of the system:
 - User authentication and authorization
+- User information management
 - Appointment scheduling
 - Prescription management
 - Medication inventory management
