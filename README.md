@@ -1,4 +1,5 @@
 # SC2002 Hospital Management System
+Github Repository: https://github.com/Frankhuex/SC2002Hospital
 ## 1. Introduction
 This is a hospital management system developed for SC2002, a software engineering course at Nanyang Technological University. The system is designed to manage the hospital's patients, doctors, and appointments. It allows the hospital to manage their resources and schedule appointments with patients. The system is designed to be user-friendly and easy to use, with a command line based user interface.
 
