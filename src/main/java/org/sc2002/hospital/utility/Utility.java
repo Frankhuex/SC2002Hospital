@@ -21,11 +21,14 @@ public class Utility {
     public static int inputSafeInt(Scanner sc) {
         while (true) {
             try {
-                int input = sc.nextInt();
+                int input = sc.nextInt();        
+                if (input<0) {
+                    throw new Exception();
+                }
                 sc.nextLine();
                 return input;
             } catch (Exception e) {
-                System.out.println("Invalid input. Please enter an integer.");
+                System.out.println("Invalid input. Please enter a positive integer.");
                 sc.nextLine();
             }
         }
