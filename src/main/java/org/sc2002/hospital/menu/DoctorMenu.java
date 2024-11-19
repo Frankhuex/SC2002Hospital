@@ -415,10 +415,18 @@ public class DoctorMenu implements Menu {
         System.out.println("Appointment set as available.");
     }
 
-    private void askSetARPC(Appointment appointment) { //ARC:Accepted, Rejected, Pending, Completed
+    private void askSetARPC(Appointment appointment) { //ARPC:Accepted, Rejected, Pending, Completed
         System.out.println("Choose operation:"); 
         System.out.println("1. Confirm, 2. Cancel, 3. Pend, 4. Complete, 0. Back");
         int choice = Utility.inputSafeInt(sc);
+        if (appointment.getStatus()==Appointment.Status.COMPLETED) {
+            System.out.println("Appointment already completed. Are you sure you want to change the status? (y/n)");
+            String choice2 = Utility.inputNonEmptyString(sc);
+            if (!choice2.equalsIgnoreCase("y")) {
+                System.out.println("Appointment status not changed.");
+                return;
+            }
+        }
         switch (choice) {
             case 1:
                 appointment.setStatus(Appointment.Status.CONFIRMED);
