@@ -3,19 +3,9 @@
  */
 
 package org.sc2002.hospital;
-import java.util.HashMap;
-
-import org.sc2002.hospital.container.RecordContainer;
-import org.sc2002.hospital.container.data.AppointmentContainer;
-import org.sc2002.hospital.container.data.AppointmentOutcomeContainer;
-import org.sc2002.hospital.container.data.InventoryContainer;
-import org.sc2002.hospital.container.data.MedicalContainer;
-import org.sc2002.hospital.container.data.PrescriptionContainer;
-import org.sc2002.hospital.container.data.ReplenishContainer;
-import org.sc2002.hospital.container.user.PatientContainer;
-import org.sc2002.hospital.container.user.StaffContainer;
-import org.sc2002.hospital.container.*;
+import org.sc2002.hospital.container.ContainerLoader;
 import org.sc2002.hospital.menu.StartMenu;
+import org.sc2002.hospital.record.Record;
 import org.sc2002.hospital.utility.Utility;
 /**
  *
@@ -35,6 +25,7 @@ public class SC2002Project {
             "data/staff.csv"
         };
         ContainerLoader containerLoader=new ContainerLoader(paths);
+        System.out.println(Record.getIdCounter());
         StartMenu startMenu=new StartMenu(containerLoader);
         startMenu.run();
         containerLoader.writeCSVs();

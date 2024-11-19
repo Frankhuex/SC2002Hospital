@@ -1,3 +1,4 @@
 "recordId","inventoryRecordId","quantity","pharmacistRecordId","status"
 54,7,100,2,"APPROVED"
 175,9,10,2,"APPROVED"
+203,7,1000,2,"PENDING"
