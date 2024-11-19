@@ -5,7 +5,6 @@
 package org.sc2002.hospital;
 import org.sc2002.hospital.container.ContainerLoader;
 import org.sc2002.hospital.menu.StartMenu;
-import org.sc2002.hospital.record.Record;
 import org.sc2002.hospital.utility.Utility;
 /**
  *
@@ -25,7 +24,7 @@ public class SC2002Project {
             "data/staff.csv"
         };
         ContainerLoader containerLoader=new ContainerLoader(paths);
-        System.out.println(Record.getIdCounter());
+        //System.out.println(Record.getIdCounter());
         StartMenu startMenu=new StartMenu(containerLoader);
         startMenu.run();
         containerLoader.writeCSVs();
