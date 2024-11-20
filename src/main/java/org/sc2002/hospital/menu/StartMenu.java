@@ -73,6 +73,10 @@ public class StartMenu implements Menu {
         while (true) {
             System.out.print("Enter hospital ID (or 0 to quit): ");
             hospitalID = Utility.inputNonEmptyString(sc);
+            if (patientContainer.containsUser(hospitalID) || staffContainer.containsUser(hospitalID)) {
+                System.out.println("Error: Hospital ID already exists.");
+                return;
+            }
             if (hospitalID.equals("0")) {
                 System.out.println("Returning to main menu...");
                 return;  // Quit and return to main menu

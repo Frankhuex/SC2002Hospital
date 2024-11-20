@@ -23,6 +23,7 @@ public class SC2002Project {
             "data/patient.csv",
             "data/staff.csv"
         };
+        Utility.removeEmptyLines(paths);
         ContainerLoader containerLoader=new ContainerLoader(paths);
         //System.out.println(Record.getIdCounter());
         StartMenu startMenu=new StartMenu(containerLoader);

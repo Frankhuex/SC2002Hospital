@@ -60,7 +60,7 @@ public class InventoryContainer extends RecordContainer {
     @Override
     public void writeCSV(String csvPath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(csvPath))) {
-            writer.write("\"recordId\",\"medicineName\",\"currentStock\",\"alertThreshold\",\"pharmacistRefillRequest\"");
+            writer.write("\"recordId\",\"medicineName\",\"currentStock\",\"alertThreshold\"");
             writer.newLine();
             while (!recordIdQueueIsEmpty()) {
                 Inventory record = (Inventory)getRecord(dequeueRecordId());

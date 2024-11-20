@@ -3,13 +3,12 @@ package org.sc2002.hospital.record;
 public abstract class Record {
     private static int idCounter=0;
     private int recordId;
-
     private static int maxInitRecordId=0;
 
     public Record() {
         recordId=idCounter++;
-        //System.out.println(idCounter);
     }
+
     public int getRecordId() {
         return recordId;
     }

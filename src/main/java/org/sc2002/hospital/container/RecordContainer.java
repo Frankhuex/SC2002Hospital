@@ -8,14 +8,25 @@ import org.sc2002.hospital.record.Record;
 public abstract class RecordContainer {
     private final HashMap<Integer,Record> records;
     private final Queue<Integer> recordIdQueue;
-
     public RecordContainer() {
         records = new HashMap<>();
         recordIdQueue = new LinkedList<>();
     }
-
     public abstract void readCSV(String csvPath);
     public abstract void writeCSV(String csvPath);
+    public void putRecord(Record record) {
+        records.put(record.getRecordId(), record);
+        recordIdQueue.add(record.getRecordId());
+    }
+    public void removeRecord(int recordId) {
+        if (records.containsKey(recordId))
+            records.remove(recordId);
+    }
+    public Record getRecord(int recordId) {
+        if (!records.containsKey(recordId))
+            return null;
+        return records.get(recordId);
+    }
 
     public HashMap<Integer,Record> getRecords() {
         return records;
@@ -31,21 +42,7 @@ public abstract class RecordContainer {
         return recordIdQueue.isEmpty();
     }
 
-    public void putRecord(Record record) {
-        records.put(record.getRecordId(), record);
-        recordIdQueue.add(record.getRecordId());
-    }
-
-    public void removeRecord(int recordId) {
-        if (records.containsKey(recordId))
-            records.remove(recordId);
-    }
-
-    public Record getRecord(int recordId) {
-        if (!records.containsKey(recordId))
-            return null;
-        return records.get(recordId);
-    }
+    
 
     public Boolean containsRecord(int recordId) {
         return records.containsKey(recordId);

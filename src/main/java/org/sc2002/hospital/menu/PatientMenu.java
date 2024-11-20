@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 
+import org.sc2002.hospital.container.ContainerLoader;
 import org.sc2002.hospital.container.data.AppointmentContainer;
 import org.sc2002.hospital.container.data.AppointmentOutcomeContainer;
 import org.sc2002.hospital.container.data.MedicalContainer;
 import org.sc2002.hospital.container.data.PrescriptionContainer;
 import org.sc2002.hospital.container.user.PatientContainer;
 import org.sc2002.hospital.container.user.StaffContainer;
-import org.sc2002.hospital.container.*;
 import org.sc2002.hospital.record.data.Appointment;
 import org.sc2002.hospital.record.data.AppointmentOutcome;
 import org.sc2002.hospital.record.data.Medical;
@@ -341,6 +341,7 @@ public class PatientMenu implements Menu {
                              "\nStatus: " + apt.getStatus() + "\n");
         }
     }
+    
     /* 
     private void scheduleNewAppointment() {
         System.out.println("\n=== Schedule New Appointment ===");
