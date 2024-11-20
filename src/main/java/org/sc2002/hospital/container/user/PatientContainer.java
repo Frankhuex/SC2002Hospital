@@ -72,6 +72,7 @@ public class PatientContainer extends UserContainer {
             writer.newLine();
             while (!recordIdQueueIsEmpty()) {
                 Patient patient = (Patient) getRecord(dequeueRecordId());
+                if (patient==null) continue;
                 String line=String.format("%d,\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\"",
                     patient.getRecordId(),
                     patient.getHospitalId(),

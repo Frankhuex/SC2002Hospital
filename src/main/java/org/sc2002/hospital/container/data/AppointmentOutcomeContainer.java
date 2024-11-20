@@ -70,6 +70,7 @@ public class AppointmentOutcomeContainer extends RecordContainer {
             writer.newLine();
             while (!recordIdQueueIsEmpty()) {
                 AppointmentOutcome record = (AppointmentOutcome)getRecord(dequeueRecordId());
+                if (record==null) continue;
                 String pRecordIds = String.join(",", record.getPrescriptionRecordIds().toString())
                     .replace("[", "")
                     .replace("]", "")

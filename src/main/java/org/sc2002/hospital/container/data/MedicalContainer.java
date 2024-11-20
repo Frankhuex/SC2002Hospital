@@ -58,6 +58,7 @@ public class MedicalContainer extends RecordContainer {
             writer.newLine();
             while (!recordIdQueueIsEmpty()) {
                 Medical record = (Medical) getRecord(dequeueRecordId());
+                if (record==null) continue;
                 String line = String.format("%d,%d,\"%s\",\"%s\",\"%s\"",
                     record.getRecordId(),
                     record.getPatientRecordId(),

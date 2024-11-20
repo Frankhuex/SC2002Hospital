@@ -69,6 +69,7 @@ public class StaffContainer extends UserContainer {
             writer.newLine();
             while (!recordIdQueueIsEmpty()) {
                 Staff record = (Staff) getRecord(dequeueRecordId());
+                if (record == null) continue;
                 String line=String.format("%d,\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",\"%s\",%d",
                     record.getRecordId(),
                     record.getHospitalId(),

@@ -53,6 +53,7 @@ public class PrescriptionContainer extends RecordContainer {
             writer.newLine();
             while (!recordIdQueueIsEmpty()) {
                 Prescription prescription = (Prescription) getRecord(dequeueRecordId());
+                if (prescription==null) continue;
                 String line = String.format("%d,\"%s\",%d,\"%s\"",
                     prescription.getRecordId(),
                     prescription.getMedication(),

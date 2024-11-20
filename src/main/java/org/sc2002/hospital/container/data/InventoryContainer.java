@@ -64,6 +64,7 @@ public class InventoryContainer extends RecordContainer {
             writer.newLine();
             while (!recordIdQueueIsEmpty()) {
                 Inventory record = (Inventory)getRecord(dequeueRecordId());
+                if (record==null) continue;
                 String line = String.format("%d,\"%s\",%d,%d",
                     record.getRecordId(),
                     record.getMedicineName(),
