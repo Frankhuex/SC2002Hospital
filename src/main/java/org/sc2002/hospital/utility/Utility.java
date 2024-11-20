@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import org.sc2002.hospital.record.user.User;
 
@@ -55,42 +56,11 @@ public class Utility {
         }
     }
 
-    // public static String inputSafeDateOfBirth(Scanner sc) {
-    //     while (true) { 
-    //         String dateOfBirth=Utility.inputNonEmptyString(sc);
-    //         String[] dateParts = dateOfBirth.split("-");
-    //         if (dateParts.length != 3) {
-    //             System.out.println("Invalid date format. Please use DD-MM-YYYY format.");
-    //             continue;
-    //         }
-    //         try {
-    //             int day = Integer.parseInt(dateParts[0]);
-    //             int month = Integer.parseInt(dateParts[1]);
-    //             int year = Integer.parseInt(dateParts[2]);
-                
-    //             // Basic date validation
-    //             if (day < 1 || day > 31) {
-    //                 System.out.println("Invalid day. Must be between 1 and 31.");
-    //                 continue;
-    //             }
-    //             if (month < 1 || month > 12) {
-    //                 System.out.println("Invalid month. Must be between 1 and 12.");
-    //                 continue;
-    //             }
-    //             if (year < CURRENTDATE_ORIGINAL.getYear()) {
-    //                 System.out.println("Invalid year. Cannot schedule appointments in the past.");
-    //                 continue;
-    //             }
-    //             return dateOfBirth;
-    //         } catch (NumberFormatException e) {
-    //             System.out.println("Invalid date format. Please use numbers for DD-MM-YYYY.");
-    //             continue;
-    //         } catch (Exception e) {
-    //             System.out.println("Invalid date. Please check your input.");
-    //             continue;
-    //         }
-    //     }
-    // }
+    public static boolean isValidDateOfBirth(String date) {
+        String regex = "^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\\d{4}$";
+        Pattern pattern = Pattern.compile(regex);
+        return pattern.matcher(date).matches();
+    }
 
     public static int compareDate(String date1, String date2) {
         String[] dateParts1 = date1.split("-");

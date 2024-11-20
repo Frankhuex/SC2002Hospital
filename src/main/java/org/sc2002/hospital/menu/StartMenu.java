@@ -133,7 +133,7 @@ public class StartMenu implements Menu {
                 System.out.println("Returning to main menu...");
                 return;  // Quit and return to main menu
             }
-            if (dob.matches("\\d{2}-\\d{2}-\\d{4}")) {
+            if (dob.matches("^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\\d{4}$")) {
                 patient.setDateOfBirth(dob);
                 break;
             } else {
